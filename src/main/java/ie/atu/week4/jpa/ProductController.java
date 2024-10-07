@@ -10,9 +10,10 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     private List<Product> productList = new ArrayList<>();
-    private ProductRepository productRepository;
-    public ProductController(ProductRepository productRepository) {
-       this.productRepository = productRepository;
+    private ProductService productService
+    public ProductController(ProductService productService)
+    {
+       this.productService = productService;
     }
     @GetMapping("/getProducts")
     public List<Product> getProducts() {
@@ -21,8 +22,7 @@ public class ProductController {
 
     @PostMapping("/addProduct")
     public ResponseEntity<List> addProduct(@RequestBody Product product) {
-        productRepository.save(product);
-        productList = productRepository.findAll();
+        productList = productService.add(product);
 
         return ResponseEntity.ok(productList);
     }

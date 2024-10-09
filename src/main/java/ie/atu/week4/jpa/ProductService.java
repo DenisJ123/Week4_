@@ -16,4 +16,14 @@ public class ProductService {
         productRepository.save(product);
         return productRepository.findAll();
     }
+    public String update(Long id, Product product)
+    {
+        if (productRepository.existsById(product.getId())){
+            product.setId(id);
+            productRepository.save(product);
+            return "Product updated";
+        }else {
+            return "Product not found";
+        }
+    }
 }

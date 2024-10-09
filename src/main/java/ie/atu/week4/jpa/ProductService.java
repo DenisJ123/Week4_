@@ -22,7 +22,18 @@ public class ProductService {
             product.setId(id);
             productRepository.save(product);
             return "Product updated";
-        }else {
+        }
+        else {
+            return "Product not found";
+        }
+    }
+    public String delete(Long id)
+    {
+        if(productRepository.existsById(id)){
+            productRepository.deleteById(id);
+            return "Product deleted";
+        }
+        else{
             return "Product not found";
         }
     }

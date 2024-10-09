@@ -18,7 +18,7 @@ public class ProductService {
     }
     public String update(Long id, Product product)
     {
-        if (productRepository.existsById(product.getId())){
+        if (productRepository.existsById(id)){
             product.setId(id);
             productRepository.save(product);
             return "Product updated";

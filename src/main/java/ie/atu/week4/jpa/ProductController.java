@@ -15,41 +15,29 @@ public class ProductController {
     {
        this.productService = productService;
     }
+
     @GetMapping("/getProducts")
-    public List<Product> getProducts() {
+    public List<Product> getProducts()
+    {
         return productList;
     }
 
     @PostMapping("/addProduct")
-    public ResponseEntity<List> addProduct(@RequestBody Product product) {
+    public ResponseEntity<List> addProduct(@RequestBody Product product)
+    {
         productList = productService.add(product);
-
         return ResponseEntity.ok(productList);
     }
 
-    /*private Product findProductById(int id) {
-        for (Product product : productList) {
-            if (product.getProductCode() == id) {
-                return product;
-            }
-        }
-        return null;
-    }*/
-
     @PutMapping("/updateProduct/{id}")
-    public String updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public String updateProduct(@PathVariable Long id, @RequestBody Product product)
+    {
         return productService.update(id, product);
     }
 
-  /*  @DeleteMapping("/deleteProduct/{id}")
-    public ResponseEntity<List<Product>> deleteProduct(@PathVariable int id) {
-        Product existingProduct = findProductById(id);
-
-        if (existingProduct != null) {
-            productList.remove(existingProduct);
-            return ResponseEntity.ok(productList);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
+    @DeleteMapping("/deleteProduct/{id}")
+    public String deleteProduct(@PathVariable Long id)
+    {
+        return productService.delete(id);
+    }
 }
